@@ -10,7 +10,7 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <title>Home</title>
+    <title>Articulos</title>
   </head>
   <body>
     <!-- ACA VA EL HEADER -->
@@ -34,35 +34,60 @@
       </div>
     </section>
 
-    <!-- HERO -->
+    <!-- ACA VA EL HERO -->
     <section>
-      <div class="px-4 py-5 my-5 text-center">
-        <h1 class="display-5 fw-bold">Hack the blog</h1>
-        <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4">El blog de hack academy</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
+      <div>
+        <div class="px-4 py-5 my-5 text-center">
+          <h4 class="display-8 fw-bold"><%= article.title %></h4>
+          <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+              Creado por <%= article.author %> el <%= article.date %>
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--  ACA VA EL MAIN -->
+    <section>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <p><%= article.content %></p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ARTICULOS -->
-    <section>
-      <div class="containter text-center">
-        <div>
-          <h2>Man must explore, and this is exploration at its greatest</h2>
-          <p>Creado por Marty McFly el 24 de Setiembre,2022</p>
-        </div>
-        <div>
-          <h2>Man must explore, and this is exploration at its greatest</h2>
-          <p>Creado por Marty McFly el 24 de Setiembre,2022</p>
-        </div>
-        <div>
-          <h2>Man must explore, and this is exploration at its greatest</h2>
-          <p>Creado por Marty McFly el 24 de Setiembre,2022</p>
-        </div>
+    <!-- ACA VA EL FORM -->
+    <section class="text-center container">
+      <h2 class="mt-5">Add your coments</h2>
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="Name"
+        />
+      </div>
+      <div class="mb-3">
+        <textarea class="form-control" id="e" rows="3"></textarea>
+        <button class="form-control bg-primary mt-3" id="" rows="3">
+          SEND
+        </button>
       </div>
     </section>
 
+    <!-- ACA VAN LOS COMENTARIOS -->
+    <section class="text-center">
+      <h2 class="mt-5">Comentarios</h2>
+      <div class="row mt-5">
+        <div class="col">
+          <p><%= article.comment%></p>
+          <p><%= article.author %></p>
+        </div>
+      </div>
+    </section>
     <!-- FOOTER -->
     <section>
       <footer
