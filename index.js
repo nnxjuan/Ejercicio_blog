@@ -48,3 +48,39 @@ Article.init(
   },
   { sequelize, modelName: "article", timestamps: false }
 );
+
+app.get("/", (req, res) => {
+  res.render("home");
+});
+
+// for (const article of articles)
+
+app.post("/", async (req, res) => {
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "rootroot",
+    database: "db_blog",
+  });
+  const [articles, fields] = await connection.execute("SELECT * FROM articles");
+  res.redirect("/", { articles });
+});
+
+app.get("/articles", (req, res) => {
+  res.render("articles");
+});
+
+// for (const article of articles)
+
+app.post("/articles/:id", async (req, res) => {
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "rootroot",
+    database: "db_blog",
+  });
+  const [articles, fields] = await connection.execute(
+    `SELECT * FROM articles WHERE id=${req.params.id}`
+  );
+  res.redirect("/", { articles });
+});
