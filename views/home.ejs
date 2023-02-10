@@ -52,7 +52,10 @@
         <div>
           <a href="/article/<%= article.id %>"><%= article.title %></a>
 
-          <p>Creado por <%= article.author %> el <%= article.date %></p>
+          <p>
+            Creado por <%= article.author.firstname %> <%=
+            article.author.lastname %> el <%= article.date %>
+          </p>
         </div>
         <% } %>
       </div>

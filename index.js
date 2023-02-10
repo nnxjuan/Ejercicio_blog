@@ -37,10 +37,7 @@ Article.init(
       allowNull: false,
       type: DataTypes.DATEONLY,
     },
-    author: {
-      allowNull: false,
-      type: DataTypes.STRING(100),
-    },
+
     comment: {
       allowNull: false,
       type: DataTypes.STRING(255),
@@ -49,8 +46,39 @@ Article.init(
   { sequelize, modelName: "article", timestamps: false }
 );
 
+// Herencia
+class Author extends Model {}
+Author.init(
+  {
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    firstname: {
+      allowNull: false,
+      type: DataTypes.STRING(100),
+    },
+    lastname: {
+      allowNull: false,
+      type: DataTypes.STRING(100),
+    },
+    mail: {
+      allowNull: false,
+      type: DataTypes.STRING(100),
+    },
+  },
+  { sequelize, modelName: "author", timestamps: false }
+);
+// Un articulo pertenece a un autor
+Article.belongsTo(Author);
+// Un autor puede tener muchos articulos
+Author.hasMany(Article);
+
+sequelize.sync();
+
 app.get("/", async (req, res) => {
-  const articles = await Article.findAll();
+  const articles = await Article.findAll({ include: Author });
   console.log(articles);
   res.render("home", { articles });
 });
@@ -58,14 +86,6 @@ app.get("/", async (req, res) => {
 app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
-  const article = await Article.findByPk(id);
+  const article = await Article.findByPk(id, { include: Author });
   res.render("article", { article });
 });
-
-// for (const article of articles)
-
-// app.post("/articles/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const article = await Article.findByPk(id);
-//   res.redirect("/article", { article });
-// });

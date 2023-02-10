@@ -41,7 +41,8 @@
           <h4 class="display-8 fw-bold"><%= article.title %></h4>
           <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">
-              Creado por <%= article.author %> el <%= article.date %>
+              Creado por <%= article.author.firstname %> <%=
+              article.author.lastname %> el <%= article.date %>
             </p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
           </div>
@@ -84,7 +85,7 @@
       <div class="row mt-5">
         <div class="col">
           <p><%= article.comment%></p>
-          <p><%= article.author %></p>
+          <p><%= article.authorid %></p>
         </div>
       </div>
     </section>
