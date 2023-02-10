@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -7,10 +8,15 @@ app.listen(port, () => console.log("Probando puerto"));
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 //const sequelize = new Sequelize('database', 'username', 'password')
-const sequelize = new Sequelize("Blog", "root", "root1234", {
-  host: "localhost",
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  process.env.DB_DATABASE,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_CONNECTION,
+  }
+);
 
 // Herencia
 class Article extends Model {}
