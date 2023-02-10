@@ -107,6 +107,10 @@ app.get("/admin/create", async (req, res) => {
   res.render("create");
 });
 
+app.get("/admin/create", async (req, res) => {
+  res.render("admin/create");
+});
+
 //EDITAR ARTICULO
 app.get("/admin/edit", async (req, res) => {
   const { id } = req.params;
