@@ -14,25 +14,7 @@
   </head>
   <body>
     <!-- ACA VA EL HEADER -->
-    <section>
-      <div class="text-white">
-        <header
-          class="bg-dark d-flex flex-wrap align-items-space-between justify-content- justify-content-md-between py-3 mb-4 border-bottom"
-        >
-          <ul
-            class="nav col-12 col-md-auto mb-2 justify-content-flex-start mb-md-0"
-          >
-            <li>
-              <a href="#" class="text-white nav-link">Hack the blog</a>
-            </li>
-          </ul>
-
-          <div class="col-md-3 text-end me-5">
-            <button type="button" class="btn btn-primary">Admin</button>
-          </div>
-        </header>
-      </div>
-    </section>
+    <%- include ('partials/navbar') %>
 
     <!-- HERO -->
     <section>
@@ -62,22 +44,6 @@
     </section>
 
     <!-- FOOTER -->
-    <section>
-      <footer
-        class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4 border-top"
-      >
-        <div class="col-md-4 d-flex align-items-center">
-          <a
-            href="/"
-            class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
-          >
-            <svg class="bi" width="30" height="24">
-              <use xlink:href="#bootstrap"></use>
-            </svg>
-          </a>
-          <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
-        </div>
-      </footer>
-    </section>
+    <%- include ('partials/footer') %>
   </body>
 </html>
