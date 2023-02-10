@@ -82,16 +82,47 @@ Article.belongsTo(Author);
 Author.hasMany(Article);
 
 sequelize.sync();
-
+//HOME
 app.get("/", async (req, res) => {
   const articles = await Article.findAll({ include: Author });
   console.log(articles);
   res.render("home", { articles });
 });
-
+//ARTICULOS
 app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
   const article = await Article.findByPk(id, { include: Author });
   res.render("article", { article });
+});
+//ADMIN
+app.get("/admin", async (req, res) => {
+  const articles = await Article.findAll({ include: Author });
+  console.log(articles);
+  res.render("admin", { articles });
+});
+
+// CREAR ARTICULO
+app.get("/admin/create", async (req, res) => {
+  res.render("create");
+});
+
+//EDITAR ARTICULO
+app.get("/admin/edit", async (req, res) => {
+  const { id } = req.params;
+  const article = await Article.findByPk(id, { include: Author });
+  res.render("edit");
+});
+
+app.post("/admin/edit", async (req, res) => {
+  const { id } = req.params;
+  await Article.findByPk(id, { include: Author });
+  return res.redirect("/admin");
+});
+
+//ELIMINAR ARTICULO
+app.get("/admin/delet/:id", async (req, res) => {
+  const { id } = req.params;
+  await Article.findByPk(id, { include: Author });
+  return res.redirect("/admin");
 });
