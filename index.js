@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
 app.listen(port, () => console.log("Probando puerto"));
 
 const { Sequelize, Model, DataTypes } = require("sequelize");
@@ -127,6 +128,6 @@ app.post("/admin/edit", async (req, res) => {
 //ELIMINAR ARTICULO
 app.get("/admin/delet/:id", async (req, res) => {
   const { id } = req.params;
-  await Article.findByPk(id, { include: Author });
+  await Article.destroy({ where: { id: `${id}` }, include: Author });
   return res.redirect("/admin");
 });
