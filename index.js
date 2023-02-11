@@ -77,6 +77,27 @@ Author.init(
   },
   { sequelize, modelName: "author", timestamps: false }
 );
+// Herencia
+class Comment extends Model {}
+Comment.init(
+  {
+    id: {
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    text: {
+      allowNull: false,
+      type: DataTypes.STRING(255),
+    },
+
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING(100),
+    },
+  },
+  { sequelize, modelName: "comment", timestamps: false }
+);
 // Un articulo pertenece a un autor
 Article.belongsTo(Author);
 // Un autor puede tener muchos articulos
