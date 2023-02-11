@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: Blog
--- Generation Time: 2023-02-10 11:30:10.1110
+-- Generation Time: 2023-02-11 14:28:19.0300
 -- -------------------------------------------------------------
 
 
@@ -44,6 +44,8 @@ CREATE TABLE `authors` (
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
