@@ -44,11 +44,6 @@ Article.init(
       allowNull: false,
       type: DataTypes.DATEONLY,
     },
-
-    comment: {
-      allowNull: false,
-      type: DataTypes.STRING(255),
-    },
   },
   { sequelize, modelName: "article", timestamps: false }
 );
@@ -102,7 +97,8 @@ Comment.init(
 Article.belongsTo(Author);
 // Un autor puede tener muchos articulos
 Author.hasMany(Article);
-
+Comment.belongsTo(Article);
+Article.belongsTo(Comment);
 sequelize.sync();
 //HOME
 app.get("/", async (req, res) => {
