@@ -122,18 +122,18 @@ app.get("/admin/edit/:id", async (req, res) => {
 app.post("/admin/edit/:id", async (req, res) => {
   const { id } = req.params;
   const rBody = req.body;
-  //   await Article.update(
-  //     {
-  //       title: req.body.title,
-  //       content: req.body.content,
-  //       img: req.body.image,
-  //     },
-  //     {
-  //       where: {
-  //         id: req.params,
-  //       },
-  //     }
-  //   );
+  await Article.update(
+    {
+      title: req.body.title,
+      content: req.body.content,
+      img: req.body.image,
+    },
+    {
+      where: {
+        id: `${id}`,
+      },
+    }
+  );
   return res.redirect("/admin");
 });
 
