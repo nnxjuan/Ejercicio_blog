@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-
+pp.use(express.static("public"));
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 //const sequelize = new Sequelize('database', 'username', 'password')
