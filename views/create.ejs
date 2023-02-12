@@ -14,8 +14,9 @@
   </head>
   <body>
     <%- include ('partials/navbar') %>
-    <h2>Create new post</h2>
-    <form>
+    
+    <form class="container">
+      <h2>Create new post</h2>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Title</label>
         <input
@@ -43,7 +44,16 @@
         />
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Author</label>
+        <label for="exampleInputPassword1" class="form-label">First name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputPassword1"
+    
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Last name</label>
         <input
           type="text"
           class="form-control"
