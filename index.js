@@ -109,7 +109,10 @@ app.get("/", async (req, res) => {
 app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
-  const comments = await Comment.findAll();
+  const comments = await Comment.findAll({
+    where: { articleId: `${id}` },
+    include: Article,
+  });
   const article = await Article.findByPk(id, { include: Author });
   res.render("article", { article, comments });
 });
