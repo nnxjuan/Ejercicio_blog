@@ -10,6 +10,7 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Home</title>
   </head>
   <body>
@@ -17,15 +18,20 @@
     <%- include ('partials/navbar') %>
 
     <!-- HERO -->
-    <section>
-      <div class="px-4 py-5 my-5 text-center">
-        <h1 class="display-5 fw-bold">Hack the blog</h1>
-        <div class="col-lg-6 mx-auto">
+    <div
+      class="p-5 text-center bg-image"
+      style="
+        background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+        height: 400px;
+      "
+    >
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="display-5 fw-bold">Hack the blog</h1>
           <p class="lead mb-4">El blog de hack academy</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- ARTICULOS -->
     <section>

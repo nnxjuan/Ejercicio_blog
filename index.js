@@ -2,9 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 3000;
+app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.listen(port, () => console.log("Probando puerto"));
 
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
@@ -160,3 +160,5 @@ app.get("/admin/delet/:id", async (req, res) => {
   await Article.destroy({ where: { id: `${id}` }, include: Author });
   return res.redirect("/admin");
 });
+
+app.listen(port, () => console.log("Probando puerto"));
