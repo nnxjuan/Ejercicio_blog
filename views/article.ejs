@@ -43,32 +43,37 @@
     </section>
 
     <!-- ACA VA EL FORM -->
-    <section class="text-center container">
-      <h2 class="mt-5">Add your coments</h2>
-      <div class="mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="exampleFormControlInput1"
-          placeholder="Name"
-        />
-      </div>
-      <div class="mb-3">
-        <textarea class="form-control" id="e" rows="3"></textarea>
-        <button class="form-control bg-primary mt-3" id="" rows="3">
-          SEND
-        </button>
-      </div>
-    </section>
+    <form method="POST" action="/article/<%= article.id %>">
+      <section class="text-center container">
+        <h2 class="mt-5">Add your comments</h2>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Name"
+            name="name"
+          />
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" id="e" rows="3" name="text"></textarea>
+          <button class="form-control bg-primary mt-3" id="" rows="3">
+            SEND
+          </button>
+        </div>
+      </section>
+    </form>
 
     <!-- ACA VAN LOS COMENTARIOS -->
     <section class="text-center">
-      <h2 class="mt-5">Comentarios</h2>
-      <div class="row mt-5">
-        <div class="col">
-          <p><%= %></p>
-          <p><%= %></p>
+      <h2 class="mt-5">Comments</h2>
+      <div class="mt-5">
+        <% for ( comment of comments) {%>
+        <div class="">
+          <h3><%= comment.text %></h3>
+          <p><%= comment.name %></p>
         </div>
+        <% } %>
       </div>
     </section>
     <!-- FOOTER -->

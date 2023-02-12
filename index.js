@@ -4,7 +4,6 @@ const app = express();
 const port = 3000;
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.listen(port, () => console.log("Probando puerto"));
 
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
@@ -41,7 +40,7 @@ Article.init(
       type: DataTypes.STRING(500),
     },
     date: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DATEONLY,
     },
   },
@@ -110,8 +109,9 @@ app.get("/", async (req, res) => {
 app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
+  const comments = await Comment.findAll();
   const article = await Article.findByPk(id, { include: Author });
-  res.render("article", { article });
+  res.render("article", { article, comments });
 });
 //ADMIN
 app.get("/admin", async (req, res) => {
@@ -125,8 +125,17 @@ app.get("/admin/create", async (req, res) => {
   res.render("create");
 });
 
-app.get("/admin/create", async (req, res) => {
-  res.render("admin/create");
+app.post("/admin/create", async (req, res) => {
+  const rBody = req.body;
+  await Article.create({
+    title: req.body.title,
+    content: req.body.content,
+    img: req.body.image,
+    date: req.body.date,
+    authorId: 1,
+  });
+
+  return res.redirect("/");
 });
 
 //EDITAR ARTICULO
@@ -160,3 +169,23 @@ app.get("/admin/delet/:id", async (req, res) => {
   await Article.destroy({ where: { id: `${id}` }, include: Author });
   return res.redirect("/admin");
 });
+
+// CREAR COMENTARIO
+const today = new Date();
+
+app.post("/article/:id", async (req, res) => {
+  const rBody = req.body;
+  const { id } = req.params;
+  await Comment.create({
+    name: req.body.name,
+    text: req.body.text,
+    name: req.body.name,
+    date: today,
+    articleId: `${id}`,
+    include: Article,
+  });
+
+  return res.redirect(`/article/${id}`);
+});
+
+app.listen(port, () => console.log("Probando puerto"));

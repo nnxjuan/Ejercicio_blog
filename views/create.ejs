@@ -14,57 +14,31 @@
   </head>
   <body>
     <%- include ('partials/navbar') %>
-    
-    <form class="container">
+
+    <form class="container" method="POST" action="/admin/create">
       <h2>Create new post</h2>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Title</label>
-        <input
-          type="text"
-          class="form-control"
-          id="exampleInputEmail1"
-          
-        />
+        <input type="text" class="form-control" name="title" />
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Content</label>
-        <input
-          type="text"
-          class="form-control"
-          id="exampleInputPassword1"
-        />
+        <input type="text" class="form-control" name="content" />
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Image</label>
         <input
           type="text"
           class="form-control"
-          id="exampleInputPassword1"
+          name="image"
           placeholder="put url image"
         />
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">First name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="exampleInputPassword1"
-    
-        />
+        <label for="exampleInputPassword1" class="form-label">Date</label>
+        <input type="text" class="form-control" name="date" />
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Last name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="exampleInputPassword1"
-    
-        />
-      </div>
- 
- 
-      <div class="mb-3 form-check">
-     
+
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <%- include ('partials/footer') %>
