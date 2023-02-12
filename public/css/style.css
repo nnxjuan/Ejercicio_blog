@@ -1,8 +1,0 @@
-.bg-image{
-    
-    /* background-image: img src="img/estudio.jpg"; */
-    background-image: image("img/estudio.jpg");
-    height: 100vh
-
-}
-
