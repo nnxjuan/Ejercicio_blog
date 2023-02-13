@@ -20,7 +20,7 @@
     <div
       class="p-5 text-center bg-image"
       style="
-        background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+        background-image: url('https://audient.com/wp-content/uploads/2021/07/image3-2.jpg');
         height: 400px;
       "
     >
@@ -34,21 +34,25 @@
       </div>
     </div>
     
-    </section> -->
+    </section> 
 
     <!-- ARTICULOS -->
     <section>
       <div class="containter text-center">
         <% for (const article of articles) {%>
         <div>
-          <a href="/article/<%= article.id %>" class="blockquote"
+          <a href="/article/<%= article.id %>" class="blockquote link-dark"
             ><%= article.title %></a
           >
 
-          <p>
-            Creado por <%= article.author.firstname %> <%=
-            article.author.lastname %> el <%= article.date %>
+          <p >
+           
           </p>
+          <figcaption class="blockquote-footer">
+            Creado por <%= article.author.firstname %> <%=
+            article.author.lastname %> el 
+            <cite title="Source Title"><%= article.date %></cite>
+          </figcaption>
         </div>
         <% } %>
       </div>
