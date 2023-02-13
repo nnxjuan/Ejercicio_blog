@@ -28,10 +28,10 @@ module.exports = (app) => {
    * en inglés.
    */
 
-  app.use("/usuarios", userRoutes);
+  app.use("/usuarios", articleRoutes);
   app.use("/articulos", articleRoutes);
-  app.use("/comentarios", commentRoutes);
+  app.use("/comentarios", articleRoutes);
 
-  app.use("/", publicRoutes);
-  app.use("/panel", privateRoutes);
+  app.use("/", articleRoutes);
+  app.use("/panel", articleRoutes);
 };

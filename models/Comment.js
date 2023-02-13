@@ -18,6 +18,10 @@ class Comment extends Model {
           allowNull: false,
           type: DataTypes.STRING(100),
         },
+        date: {
+          allowNull: false,
+          type: DataTypes.DATEONLY,
+        },
       },
       { sequelize, modelName: "comment", timestamps: false }
     );
