@@ -15,6 +15,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: process.env.DB_CONNECTION,
+    logging: false,
   }
 );
 
@@ -89,6 +90,10 @@ Comment.init(
       allowNull: false,
       type: DataTypes.STRING(100),
     },
+    date: {
+      allowNull: false,
+      type: DataTypes.DATEONLY,
+    },
   },
   { sequelize, modelName: "comment", timestamps: false }
 );
@@ -101,16 +106,20 @@ Article.belongsTo(Comment);
 sequelize.sync();
 //HOME
 app.get("/", async (req, res) => {
-  const articles = await Article.findAll({ include: Author });
-  console.log(articles);
+  const articles = await Article.findAll({
+    order: [["date", "DESC"]],
+    include: Author,
+  });
+
   res.render("home", { articles });
 });
 //ARTICULOS
 app.get("/article/:id", async (req, res) => {
   const { id } = req.params;
-  console.log(id);
+
   const comments = await Comment.findAll({
     where: { articleId: `${id}` },
+    order: [["date", "DESC"]],
     include: Article,
   });
   const article = await Article.findByPk(id, { include: Author });
@@ -118,7 +127,10 @@ app.get("/article/:id", async (req, res) => {
 });
 //ADMIN
 app.get("/admin", async (req, res) => {
-  const articles = await Article.findAll({ include: Author });
+  const articles = await Article.findAll({
+    order: [["date", "DESC"]],
+    include: Author,
+  });
   console.log(articles);
   res.render("admin", { articles });
 });
@@ -134,7 +146,7 @@ app.post("/admin/create", async (req, res) => {
     title: req.body.title,
     content: req.body.content,
     img: req.body.image,
-    date: req.body.date,
+    date: today,
     authorId: 1,
   });
 

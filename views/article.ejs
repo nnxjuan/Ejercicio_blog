@@ -67,14 +67,15 @@
     <!-- ACA VAN LOS COMENTARIOS -->
     <section class="text-center">
       <h2 class="mt-5">Comments</h2>
-      <div class="mt-5">
-        <% for ( comment of comments) {%>
-        <div class="">
-          <h3><%= comment.text %></h3>
-          <p><%= comment.name %></p>
+      <% for ( comment of comments) {%>
+      <div class="card m-5">
+        <div class="mt-5 card-body">
+          <p class="card-text"><%= comment.text %></p>
+          <h6 class="card-subtitle mb-2 text-muted"><%= comment.name %></h6>
+          <h6 class="card-subtitle mb-2 text-muted"><%= comment.date %></h6>
         </div>
-        <% } %>
       </div>
+      <% } %>
     </section>
     <!-- FOOTER -->
     <%- include ('partials/footer') %>
