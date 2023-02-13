@@ -32,7 +32,9 @@
       <div class="containter text-center">
         <% for (const article of articles) {%>
         <div>
-          <a href="/article/<%= article.id %>"><%= article.title %></a>
+          <a href="/article/<%= article.id %>" class="blockquote"
+            ><%= article.title %></a
+          >
 
           <p>
             Creado por <%= article.author.firstname %> <%=

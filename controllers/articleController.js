@@ -104,7 +104,6 @@ async function destroy(req, res) {
   return res.redirect("/admin");
 }
 async function createComment(req, res) {
-  const rBody = req.body;
   const { id } = req.params;
   await Comment.create({
     name: req.body.name,
