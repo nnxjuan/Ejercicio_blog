@@ -28,7 +28,7 @@ async function admin(req, res) {
     order: [["date", "DESC"]],
     include: Author,
   });
-  console.log(articles);
+
   res.render("admin", { articles });
 }
 
@@ -62,7 +62,7 @@ async function store(req, res) {
       authorId: 1,
     });
     console.log(files);
-    return res.redirect("/");
+    res.redirect("/");
   });
 }
 // Show the form for editing the specified resource.
@@ -75,13 +75,15 @@ async function edit(req, res) {
 // Update the specified resource in storage.
 async function update(req, res) {
   const { id } = req.params;
+
   const form = formidable({
     multiples: true,
     uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
-  form.parse(req, async (err, fields, files) => {
-    await Article.update(
+  form.parse(req, (err, fields, files) => {
+    console.log("ok");
+    Article.update(
       {
         title: fields.title,
         content: fields.content,
@@ -93,7 +95,7 @@ async function update(req, res) {
         },
       }
     );
-    return res.redirect("/admin");
+    res.redirect("/admin");
   });
 }
 
