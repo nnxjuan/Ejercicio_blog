@@ -35,13 +35,21 @@
           name="content"
         />
       </div>
+      <figure class="figure">
+        <img
+          src="/img/<%= article.img %>"
+          class="figure-img img-fluid rounded"
+          alt="image"
+        />
+      </figure>
+      
       <div class="mb-3">
-        <label for="" class="form-label">Image</label>
+        <label for="image" class="form-label">Image</label>
         <input
-          type="text"
+          type="file"
           class="form-control"
           value="<%= article.img %>"
-          placeholder="put url image"
+          id="image"
           name="image"
         />
       </div>

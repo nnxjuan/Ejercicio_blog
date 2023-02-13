@@ -1,5 +1,5 @@
 const { Article, Author, Comment } = require("../models/indexSeq");
-
+const formidable = require("formidable");
 // Display a listing of the resource.
 const today = new Date();
 async function index(req, res) {
@@ -39,18 +39,32 @@ async function create(req, res) {
 
 // Store a newly created resource in storage.
 async function store(req, res) {
-  const rBody = req.body;
-  await Article.create({
-    title: req.body.title,
-    content: req.body.content,
-    img: req.body.image,
-    date: today,
-    authorId: 1,
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
   });
+  //   await Article.create({
+  //     title: fields.title,
+  //     content: fields.content,
+  //     img: fields.newFilename,
+  //     date: today,
+  //     authorId: 1,
+  //   });
 
-  return res.redirect("/");
+  //   return res.redirect("/");
+  form.parse(req, async (err, fields, files) => {
+    await Article.create({
+      title: fields.title,
+      content: fields.content,
+      img: files.image.newFilename,
+      date: today,
+      authorId: 1,
+    });
+    console.log(files);
+    return res.redirect("/");
+  });
 }
-
 // Show the form for editing the specified resource.
 async function edit(req, res) {
   const { id } = req.params;
@@ -61,20 +75,26 @@ async function edit(req, res) {
 // Update the specified resource in storage.
 async function update(req, res) {
   const { id } = req.params;
-  const rBody = req.body;
-  await Article.update(
-    {
-      title: req.body.title,
-      content: req.body.content,
-      img: req.body.image,
-    },
-    {
-      where: {
-        id: `${id}`,
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
+  });
+  form.parse(req, async (err, fields, files) => {
+    await Article.update(
+      {
+        title: fields.title,
+        content: fields.content,
+        img: files.image.newFilename,
       },
-    }
-  );
-  return res.redirect("/admin");
+      {
+        where: {
+          id: `${id}`,
+        },
+      }
+    );
+    return res.redirect("/admin");
+  });
 }
 
 // Remove the specified resource from storage.
