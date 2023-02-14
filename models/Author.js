@@ -21,6 +21,10 @@ class Author extends Model {
           allowNull: false,
           type: DataTypes.STRING(100),
         },
+        password:{
+          allowNull: false,
+          type: DataTypes.STRING(100),
+        }
       },
       { sequelize, modelName: "author", timestamps: false }
     );

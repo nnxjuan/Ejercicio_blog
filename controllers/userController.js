@@ -1,4 +1,9 @@
-// const { Author } = require("../models");
+//const { Author } = require("../models/Author");
+const { Article, Author, Comment } = require("../models");
+
+const bcrypt = require("bcryptjs");
+
+// Display a listing of the resource.
 
 // // Display a listing of the resource.
 // async function index(req, res) {}
@@ -21,15 +26,29 @@
 // // Remove the specified resource from storage.
 // async function destroy(req, res) {}
 
-// // Otros handlers...
-// // ...
+async function showRegister(req, res) {
+  res.render("register");
+}
 
-// module.exports = {
-//   index,
-//   show,
-//   create,
-//   store,
-//   edit,
-//   update,
-//   destroy,
-// };
+async function showLogin(req, res) {
+  res.render("login");
+}
+
+async function postRegister(req, res) {
+  const passwordParaHashear = req.body.password;
+  const passwordHasheado = await bcrypt.hash(passwordParaHashear, 10);
+
+  const nuevoUsuario = await Author.create({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    password: passwordHasheado,
+  });
+  res.redirect("/")
+}
+
+module.exports = {
+  showRegister,
+  showLogin,
+  postRegister,
+};

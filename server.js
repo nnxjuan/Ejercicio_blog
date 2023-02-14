@@ -1,13 +1,40 @@
 require("dotenv").config();
 const express = require("express");
-const routes = require("./routes/indexSeq");
+const routes = require("./routes");
 const dbInitialSetup = require("./dbInitialSetup");
 const APP_PORT = process.env.APP_PORT || 3000;
 const app = express();
 
+// Modulos de Passport.js
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+routes(app);
+/*
+// Importando Middleware Session
+
+app.use(
+    session({secret: "AlgúnTextoSuperSecreto",
+    resave: false, // Docs: "The default value is true, but using the default has been deprecated"
+    saveUninitialized: false, // Docs: "The default value is true, but using the default has been deprecated". 
+    }),
+);
+
+// Ejecutar luego del middleware la sesion
+app.use(passport.session());
+
+passport.use(new LocalStrategy(), (username, password, cb) => {
+                                                             // Aquí adentro es necesario validar (contra nuestra base de datos)  
+                                                             // que username y password sean correctos.
+                                                             // Ver la documentación de Passport por detalles.
+});*/
+
+
+
 //const sequelize = new Sequelize('database', 'username', 'password')
 // const sequelize = new Sequelize(
 //   process.env.DB_DATABASE,
@@ -106,7 +133,7 @@ app.set("view engine", "ejs");
 // Article.belongsTo(Comment);
 // sequelize.sync();
 //HOME
-routes(app);
+
 // app.get("/", async (req, res) => {
 //   const articles = await Article.findAll({
 //     order: [["date", "DESC"]],
