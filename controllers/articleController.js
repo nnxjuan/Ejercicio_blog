@@ -77,16 +77,6 @@ async function edit(req, res) {
 async function update(req, res) {
   const { id } = req.params;
   const article = await Article.findByPk(id, { include: Author });
-  // const {
-  //   image,
-  // } = () => {
-  //   if (article.img === null) {
-  //     return req.body.image;
-  //   } else {
-  //     return files.image.newFilename;
-  //   }
-  // };
-  // console.log(image);
   const form = formidable({
     multiples: true,
     uploadDir: __dirname + "/../public/img",
