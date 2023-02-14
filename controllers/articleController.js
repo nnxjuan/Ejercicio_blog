@@ -69,6 +69,7 @@ async function store(req, res) {
 async function edit(req, res) {
   const { id } = req.params;
   const article = await Article.findByPk(id, { include: Author });
+
   res.render("edit", { article });
 }
 
@@ -81,9 +82,9 @@ async function update(req, res) {
     uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, async (err, fields, files) => {
     console.log("ok");
-    Article.update(
+    await Article.update(
       {
         title: fields.title,
         content: fields.content,

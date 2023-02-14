@@ -26,7 +26,7 @@
               Creado por <%= article.author.firstname %> <%=
               article.author.lastname %> el <%= article.date %>
             </p>
-            <img src="img/<%= article.img %>" alt="" />
+            <img src="/img/<%= article.img %>" alt="image" />
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
           </div>
         </div>
@@ -34,7 +34,7 @@
     </section>
     <!--  ACA VA EL MAIN -->
     <section>
-      <div class="container text-center">
+      <div class="container text-left">
         <div class="row">
           <div class="col">
             <p><%= article.content %></p>
