@@ -76,28 +76,53 @@ async function edit(req, res) {
 // Update the specified resource in storage.
 async function update(req, res) {
   const { id } = req.params;
-
+  const article = await Article.findByPk(id, { include: Author });
+  // const {
+  //   image,
+  // } = () => {
+  //   if (article.img === null) {
+  //     return req.body.image;
+  //   } else {
+  //     return files.image.newFilename;
+  //   }
+  // };
+  // console.log(image);
   const form = formidable({
     multiples: true,
     uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
   form.parse(req, async (err, fields, files) => {
-    console.log("ok");
-    await Article.update(
-      {
-        title: fields.title,
-        content: fields.content,
-        img: files.image.newFilename,
-      },
-      {
-        where: {
-          id: `${id}`,
+    // return res.json(files);
+    if (files.img.size === 0) {
+      await Article.update(
+        {
+          title: fields.title,
+          content: fields.content,
+          img: article.img,
         },
-      }
-    );
-    res.redirect("/admin");
+        {
+          where: {
+            id: `${id}`,
+          },
+        }
+      );
+    } else {
+      await Article.update(
+        {
+          title: fields.title,
+          content: fields.content,
+          img: files.img.newFilename,
+        },
+        {
+          where: {
+            id: `${id}`,
+          },
+        }
+      );
+    }
   });
+  return res.redirect("/admin");
 }
 
 // Remove the specified resource from storage.

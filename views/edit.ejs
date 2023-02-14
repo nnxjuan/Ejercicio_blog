@@ -43,15 +43,26 @@
           alt="image"
         />
       </figure>
-      
       <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
+        <label for="image" class="form-label">Image name</label>
         <input
-          type="file"
+          type="text"
           class="form-control"
           value="<%= article.img %>"
           id="image"
           name="image"
+          disabled
+        />
+      </div>
+      
+      <div class="mb-3">
+        <label for="img" class="form-label">Image replace</label>
+        <input
+          type="file"
+          class="form-control"
+          value="<%= article.img %>"
+          id="img"
+          name="img"
         />
       </div>
       <div class="mb-3">
