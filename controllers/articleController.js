@@ -62,7 +62,7 @@ async function store(req, res) {
       content: fields.content,
       img: files.image.newFilename,
       date: today,
-      authorId: 1,
+      authorId: req.user.id,
     });
     console.log(files);
     res.redirect("/");
