@@ -70,8 +70,8 @@ async function store(req, res) {
 }
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  const { id } = req.params;
-  const article = await Article.findByPk(id, { include: Author });
+  //const { id } = req.params;
+  //const article = await Article.findByPk(id, { include: Author });
 
   res.render("edit", { article });
 }
