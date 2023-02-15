@@ -15,5 +15,5 @@ router.get("/admin/edit/:id",isAuthenticated, articleController.edit);
 router.post("/admin/edit/:id",isAuthenticated, articleController.update);
 router.get("/admin/delet/:id",isAuthenticated, articleController.destroy);
 router.post("/article/:id",isAuthenticated, articleController.createComment);
-
+//algo
 module.exports = router;
