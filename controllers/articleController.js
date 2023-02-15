@@ -1,5 +1,6 @@
 const { Article, Author, Comment } = require("../models");
 const formidable = require("formidable");
+
 // Display a listing of the resource.
 const today = new Date();
 
@@ -29,6 +30,7 @@ async function admin(req, res) {
     order: [["date", "DESC"]],
     include: Author,
   });
+
 
   res.render("admin", { articles });
 }
