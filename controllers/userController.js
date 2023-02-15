@@ -59,6 +59,7 @@ async function postRegister(req, res) {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
+    username: req.body.username,
     password: passwordHasheado,
   });
   res.redirect("/")
