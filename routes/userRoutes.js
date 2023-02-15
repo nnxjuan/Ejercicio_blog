@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
+
 // // Rutas relacionadas a los usuarios:
 // // ...
 // router.get("/", userController.index);
@@ -16,7 +17,7 @@ router.get("/registro",userController.showRegister);
 router.post("/registro",userController.postRegister);
 // Rutas del login
 router.get("/login",userController.showLogin);
-//router.post("/login",userController.postLogin);
+router.post("/login",userController.postLogin);
 // Ruta de logout
 //router.get("/logout",userController.showLogout)
 

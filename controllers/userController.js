@@ -1,7 +1,9 @@
 //const { Author } = require("../models/Author");
 const { Article, Author, Comment } = require("../models");
-
+// 1) Requerimos los paquetes que bajamos: npm i passport, npm i passport-local, npm i express-session
+const passport = require("passport");
 const bcrypt = require("bcryptjs");
+const LocalStrategy = require("passport-local");
 
 // Display a listing of the resource.
 
@@ -33,6 +35,21 @@ async function showRegister(req, res) {
 async function showLogin(req, res) {
   res.render("login");
 }
+// Funcion del  metodo POST para el LOGIN
+const postLogin = passport.authenticate("local", {
+  successRedirect: "/admin",
+  failureRedirect: "/login",
+});
+async function loginBcrypt(req,res){  // TODO LO QUE PRECISAMOS DE BCRIPT
+  // Me muestra los datos ingresados cuando doy click al boton
+  //console.log(req.body)
+  const user = await User.findOne({where:{
+      username: req.body.username}})
+  //console.log(user.password);               La pw que le puse vs La pw hasheada en la db
+  const isValidPassword = await bcrypt.compare(req.body.password, user.password)
+  console.log(isValidPassword); //No matchea: false, Si matchea: true
+
+}
 
 async function postRegister(req, res) {
   const passwordParaHashear = req.body.password;
@@ -51,4 +68,5 @@ module.exports = {
   showRegister,
   showLogin,
   postRegister,
+  postLogin,
 };

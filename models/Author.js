@@ -17,6 +17,9 @@ class Author extends Model {
           allowNull: false,
           type: DataTypes.STRING(100),
         },
+        username:{
+          type: DataTypes.STRING(100),
+        },
         email: {
           allowNull: false,
           type: DataTypes.STRING(100),
