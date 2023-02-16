@@ -26,8 +26,11 @@ async function show(req, res) {
   res.render("article", { article, comments });
 }
 async function admin(req, res) {
+  // console.log(req.session ? req.session.passport.user : 'no');
   const articles = await Article.findAll({
     order: [["date", "DESC"]],
+    //obtengo el  userid de la cookie utilizando atributo session, para poder mostrar solo los articulos que le pertenecen a ese user.
+    where:{"authorId": req.session.passport.user},
     include: Author,
   });
 
@@ -70,8 +73,8 @@ async function store(req, res) {
 }
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  //const { id } = req.params;
-  //const article = await Article.findByPk(id, { include: Author });
+  const { id } = req.params;
+  const article = await Article.findByPk(id, { include: Author });
 
   res.render("edit", { article });
 }

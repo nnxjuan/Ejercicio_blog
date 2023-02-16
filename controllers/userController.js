@@ -41,7 +41,7 @@ async function showLogin(req, res) {
 
 async function showLogout(req, res, next){
   req.logout(function(err) {
-    if (err) { return next(err); }
+    //if (err) { return next(err); }
     res.redirect('/');
   });
 };

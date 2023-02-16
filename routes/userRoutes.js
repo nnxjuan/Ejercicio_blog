@@ -19,7 +19,7 @@ router.post("/registro",userController.postRegister);
 router.get("/login",userController.showLogin);
 router.post("/login",userController.postLogin);
 // Ruta de logout
-//router.get("/logout",userController.showLogout)
+router.get("/logout",userController.showLogout)
 
 
 
