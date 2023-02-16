@@ -17,10 +17,17 @@ class Author extends Model {
           allowNull: false,
           type: DataTypes.STRING(100),
         },
-        mail: {
+        username:{
+          type: DataTypes.STRING(100),
+        },
+        email: {
           allowNull: false,
           type: DataTypes.STRING(100),
         },
+        password:{
+          allowNull: false,
+          type: DataTypes.STRING(100),
+        }
       },
       { sequelize, modelName: "author", timestamps: false }
     );
