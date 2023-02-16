@@ -26,7 +26,6 @@ async function show(req, res) {
   res.render("article", { article, comments });
 }
 async function admin(req, res) {
-  // console.log(req.session ? req.session.passport.user : 'no');
   const articles = await Article.findAll({
     order: [["date", "DESC"]],
     //obtengo el  userid de la cookie utilizando atributo session, para poder mostrar solo los articulos que le pertenecen a ese user.
