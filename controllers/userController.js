@@ -35,11 +35,24 @@ async function showRegister(req, res) {
 async function showLogin(req, res) {
   res.render("login");
 }
+
+
+//Funcion de logout
+
+async function showLogout(req, res, next){
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+};
+
+
 // Funcion del  metodo POST para el LOGIN
 const postLogin = passport.authenticate("local", {
   successRedirect: "/admin",
   failureRedirect: "/login",
 });
+
 async function loginBcrypt(req,res){  // TODO LO QUE PRECISAMOS DE BCRIPT
   // Me muestra los datos ingresados cuando doy click al boton
   //console.log(req.body)
@@ -70,4 +83,5 @@ module.exports = {
   showLogin,
   postRegister,
   postLogin,
+  showLogout
 };
