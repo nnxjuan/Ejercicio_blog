@@ -23,9 +23,9 @@ app.use(
 app.use(passport.session());
 // 4) Ejemplo de Estrategia Local usando Sequelize y Bcrypt
 passport.use(
-  new LocalStrategy(async (username, password, cb) => {
+  new LocalStrategy({usernameField: "email"}, async (email, password, cb) => {
     try {
-      const user = await Author.findOne({ where: { username } });
+      const user = await Author.findOne({ where: { email } });
       if (!user) {
         console.log("Nombre de usuario no existe.");
         return cb(null, false, { message: "Credenciales incorrectas." });
