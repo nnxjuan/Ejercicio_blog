@@ -14,10 +14,12 @@ const sequelize = new Sequelize(
 const Author = require("./Author");
 const Comment = require("./Comment");
 const Article = require("./Article");
+const Role = require("./Role");
 
 Author.initModel(sequelize);
 Comment.initModel(sequelize);
 Article.initModel(sequelize);
+Role.initModel(sequelize);
 
 /**
  * Luego de definir los modelos, se pueden establecer relaciones entre los
@@ -27,6 +29,8 @@ Article.belongsTo(Author);
 Author.hasMany(Article);
 Comment.belongsTo(Article);
 Article.hasMany(Comment);
+Author.belongsTo(Role);
+Role.hasMany(Author);
 sequelize.sync();
 
 module.exports = {
@@ -34,4 +38,5 @@ module.exports = {
   Author,
   Comment,
   Article,
+  Role,
 };

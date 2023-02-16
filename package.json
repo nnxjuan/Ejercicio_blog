@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nnxjuan/Sprint-2-Ejercicio-21#readme",
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
@@ -28,6 +29,5 @@
     "passport-local": "^1.0.0",
     "sequelize": "^6.28.0"
   },
-  "devDependencies": {},
   "description": ""
 }
