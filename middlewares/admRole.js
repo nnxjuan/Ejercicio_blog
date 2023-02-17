@@ -1,9 +1,9 @@
 function admRole(req, res, next) {
-  res.locals.user = req.user;
   if (req.user.role.code >= 400) {
     next();
+  } else {
+    res.redirect("/");
   }
-  res.redirect("/");
 }
 
 module.exports = admRole;
