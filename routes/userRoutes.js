@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
+const makeUserAvailableInViews = require("../middlewares/makeUserAvailableInViews");
 
+router.use(makeUserAvailableInViews);
 // // Rutas relacionadas a los usuarios:
 // // ...
 // router.get("/", userController.index);
@@ -13,15 +15,12 @@ const userController = require("../controllers/userController");
 // router.get("/:id", userController.destroy);
 
 // Rutas del register
-router.get("/registro",userController.showRegister);
-router.post("/registro",userController.postRegister);
+router.get("/registro", userController.showRegister);
+router.post("/registro", userController.postRegister);
 // Rutas del login
-router.get("/login",userController.showLogin);
-router.post("/login",userController.postLogin);
+router.get("/login", userController.showLogin);
+router.post("/login", userController.postLogin);
 // Ruta de logout
-router.get("/logout",userController.showLogout)
-
-
-
+router.get("/logout", userController.showLogout);
 
 module.exports = router;

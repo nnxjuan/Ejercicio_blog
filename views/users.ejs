@@ -17,46 +17,36 @@
     <a href="/admin/create" class="btn btn-success">nuevo</a>
     <!-- se agrega boton de  logout -->
     <a href="/logout" class="btn btn-success">logout</a>
-    <a href="/privado/admin/users" class="btn btn-danger">Users</a>
     <div class="container mt-4">
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Content</th>
-            <th scope="col">Image</th>
-            <th scope="col">Date</th>
-            <th scope="col">Author</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role ID</th>
             <th scope="col">Functions</th>
           </tr>
         </thead>
         <tbody>
-          <% for (const article of articles) {%>
+          <% for (user of users) {%>
           <tr>
-            <td><%= article.title %></td>
-            <td><%= article.content %></td>
-            <td>
-              <figure class="figure">
-                <img
-                  src="<%= article.img %>"
-                  class="figure-img img-fluid rounded"
-                  alt="image"
-                />
-              </figure>
-            </td>
-            <td><%= article.date %></td>
-            <td>
-              <%= article.author.firstname %> <%= article.author.lastname %>
-            </td>
+            <td><%= user.firstname %></td>
+            <td><%= user.lastname %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role.name %></td>
+
             <td>
               <div>
                 <a
-                  href="/admin/edit/<%= article.id %>  "
+                  href="/privado/user/edit/<%= user.id %>  "
                   class="btn btn-primary"
                   >Editar</a
                 >
                 <a
-                  href="/admin/delet/<%= article.id %>  "
+                  href="/privado/user/delete/<%= user.id %>  "
                   class="btn btn-danger"
                   >Eliminar</a
                 >

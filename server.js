@@ -10,7 +10,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcryptjs");
-const { Author, UserRole, Role } = require("./models/index");
+const { Author, Role } = require("./models");
 // 2)
 app.use(
   session({
@@ -25,7 +25,7 @@ app.use(passport.session());
 passport.use(
   new LocalStrategy({ usernameField: "email" }, async (email, password, cb) => {
     try {
-      const user = await Author.findOne({ where: { email } });
+      const user = await Author.findOne({ where: { email }, include: Role });
       if (!user) {
         console.log("Nombre de usuario no existe.");
         return cb(null, false, { message: "Credenciales incorrectas." });
@@ -49,7 +49,7 @@ passport.serializeUser(function (user, cb) {
 
 passport.deserializeUser(async function (id, cb) {
   try {
-    const user = await Author.findByPk(id);
+    const user = await Author.findByPk(id, { include: Role });
     cb(null, user); // req.user
   } catch (error) {
     cb(error);

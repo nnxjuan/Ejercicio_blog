@@ -1,7 +1,6 @@
 const { Article, Author, Comment } = require("../models");
 const formidable = require("formidable");
 
-// Display a listing of the resource.
 const today = new Date();
 
 async function index(req, res) {
@@ -29,10 +28,9 @@ async function admin(req, res) {
   const articles = await Article.findAll({
     order: [["date", "DESC"]],
     //obtengo el  userid de la cookie utilizando atributo session, para poder mostrar solo los articulos que le pertenecen a ese user.
-    where:{"authorId": req.session.passport.user},
+    where: { authorId: req.session.passport.user },
     include: Author,
   });
-
 
   res.render("admin", { articles });
 }
@@ -66,7 +64,7 @@ async function store(req, res) {
       date: today,
       authorId: req.user.id,
     });
-    console.log(files);
+
     res.redirect("/");
   });
 }

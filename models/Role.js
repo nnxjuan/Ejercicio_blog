@@ -9,9 +9,13 @@ class Role extends Model {
           autoIncrement: true,
           type: DataTypes.INTEGER,
         },
-        role: {
+        name: {
           allowNull: false,
           type: DataTypes.STRING(100),
+        },
+        code: {
+          allowNull: false,
+          type: DataTypes.INTEGER,
         },
       },
       { sequelize, modelName: "role", timestamps: false }

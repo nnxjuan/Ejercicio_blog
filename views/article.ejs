@@ -26,7 +26,7 @@
               Creado por <%= article.author.firstname %> <%=
               article.author.lastname %> el <%= article.date %>
             </p>
-            <img src="/img/<%= article.img %>" alt="image" />
+            <img src="<%= article.img %>" alt="image" />
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
           </div>
         </div>
@@ -44,7 +44,7 @@
     </section>
 
     <!-- ACA VA EL FORM -->
-    <form method="POST" action="/article/<%= article.id %>">
+    <form method="POST" action="/comentarios/article/<%= article.id %>">
       <section class="text-center container">
         <h2 class="mt-5">Add your comments</h2>
         <div class="mb-3">

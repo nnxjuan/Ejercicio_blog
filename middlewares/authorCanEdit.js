@@ -1,4 +1,4 @@
-const { Article } = require("../models");
+const { Author } = require("../models");
 
 function authorCanEdit(req, res, next) {
   //const userId = req.user.id;

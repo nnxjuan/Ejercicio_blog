@@ -13,14 +13,13 @@ async function showLogin(req, res) {
 
 async function showLogout(req, res, next) {
   req.logout(function (err) {
-    //if (err) { return next(err); }
     res.redirect("/");
   });
 }
 
 // Funcion del  metodo POST para el LOGIN
 const postLogin = passport.authenticate("local", {
-  successRedirect: "/admin",
+  successRedirect: "/",
   failureRedirect: "/login",
 });
 
