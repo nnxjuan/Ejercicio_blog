@@ -26,7 +26,7 @@
               Creado por <%= article.author.firstname %> <%=
               article.author.lastname %> el <%= article.date %>
             </p>
-            <img src="<%= article.img %>" alt="image" />
+            <img src="/img/<%=article.img %>" alt="image" />
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"></div>
           </div>
         </div>
@@ -76,6 +76,13 @@
         <figcaption class="blockquote-footer">
           <%= comment.name %>
           <cite title="Source Title"><%= comment.date %></cite>
+          <% if(user) { if (user.role.code >= 300){ %>
+          <a
+            href="/comentarios/edit/<%=comment.id %>"
+            class="form-control bg-primary mt-3"
+            >EDIT</a
+          >
+          <% }} %>
         </figcaption>
       </figure>
       <% } %>

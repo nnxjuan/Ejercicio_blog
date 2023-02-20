@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const articleController = require("../controllers/articleController");
-const authorCanEdit = require("../middlewares/authorCanEdit");
+
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const makeUserAvailableInViews = require("../middlewares/makeUserAvailableInViews");
 

@@ -27,8 +27,7 @@ async function show(req, res) {
 async function admin(req, res) {
   const articles = await Article.findAll({
     order: [["date", "DESC"]],
-    //obtengo el  userid de la cookie utilizando atributo session, para poder mostrar solo los articulos que le pertenecen a ese user.
-    where: { authorId: req.session.passport.user },
+
     include: Author,
   });
 
@@ -47,15 +46,7 @@ async function store(req, res) {
     uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
-  //   await Article.create({
-  //     title: fields.title,
-  //     content: fields.content,
-  //     img: fields.newFilename,
-  //     date: today,
-  //     authorId: 1,
-  //   });
 
-  //   return res.redirect("/");
   form.parse(req, async (err, fields, files) => {
     await Article.create({
       title: fields.title,
@@ -85,51 +76,65 @@ async function update(req, res) {
     uploadDir: __dirname + "/../public/img",
     keepExtensions: true,
   });
-  form.parse(req, async (err, fields, files) => {
-    // return res.json(files);
-    if (files.img.size === 0) {
-      await Article.update(
-        {
-          title: fields.title,
-          content: fields.content,
-          img: article.img,
-        },
-        {
-          where: {
-            id: `${id}`,
+  if (
+    (req.user.role.code === 200 && article.authorId === req.user.id) ||
+    req.user.role.code >= 300
+  ) {
+    form.parse(req, async (err, fields, files) => {
+      if (files.img.size === 0) {
+        await Article.update(
+          {
+            title: fields.title,
+            content: fields.content,
+            img: article.img,
           },
-        }
-      );
-    } else {
-      await Article.update(
-        {
-          title: fields.title,
-          content: fields.content,
-          img: files.img.newFilename,
-        },
-        {
-          where: {
-            id: `${id}`,
+          {
+            where: {
+              id: `${id}`,
+            },
+          }
+        );
+      } else {
+        await Article.update(
+          {
+            title: fields.title,
+            content: fields.content,
+            img: files.img.newFilename,
           },
-        }
-      );
-    }
-  });
-  return res.redirect("/admin");
+          {
+            where: {
+              id: `${id}`,
+            },
+          }
+        );
+      }
+    });
+    return res.redirect("/privado/admin");
+  } else {
+    res.send("No tiene permisos");
+  }
 }
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
-  const { id } = req.params;
-  await Article.destroy({ where: { id: `${id}` }, include: Author });
-  return res.redirect("/admin");
+  // const { id } = req.params;
+  const article = Article.findByPk(req.params.articleId, { include: Author });
+  if (
+    (req.user.role.code === 300 && article.authorId === req.user.id) ||
+    req.user.role.code === 400
+  ) {
+    await article.destroy();
+    return res.redirect("/admin");
+  } else {
+    return res.send("No tiene permisos  para esa acción");
+  }
 }
 async function createComment(req, res) {
   const { id } = req.params;
   await Comment.create({
     name: req.body.name,
     text: req.body.text,
-    name: req.body.name,
+
     date: today,
     articleId: `${id}`,
     include: Article,
@@ -137,8 +142,31 @@ async function createComment(req, res) {
 
   return res.redirect(`/article/${id}`);
 }
-// Otros handlers...
-// ...
+async function editComment(req, res) {
+  const { id } = req.params;
+  const comment = await Comment.findByPk(id, { include: Article });
+
+  res.render("editComment", { comment });
+}
+async function updateComment(req, res) {
+  const { id } = req.params;
+
+  const comment = await Comment.findByPk(id);
+  await Comment.update(
+    {
+      name: req.body.name,
+      text: req.body.text,
+    },
+
+    {
+      where: {
+        id: `${id}`,
+      },
+    }
+  );
+
+  return res.redirect(`/article/${comment.articleId}`);
+}
 
 module.exports = {
   index,
@@ -146,6 +174,8 @@ module.exports = {
   admin,
   create,
   createComment,
+  editComment,
+  updateComment,
   store,
   edit,
   update,

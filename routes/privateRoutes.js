@@ -4,9 +4,11 @@ const articleController = require("../controllers/articleController");
 const admController = require("../controllers/admController");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const admRole = require("../middlewares/admRole");
+const escritorRole = require("../middlewares/escritorRole");
 
 router.use(isAuthenticated);
 
+router.get("/admin", articleController.admin);
 router.get("/admin/create", articleController.create);
 router.post("/admin/create", articleController.store);
 router.get("/admin/edit/:id", articleController.edit);

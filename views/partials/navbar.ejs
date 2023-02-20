@@ -10,11 +10,16 @@
           <a href="/" class="text-white nav-link">Hack the blog</a>
         </li>
       </ul>
-      <% if(user) { if (user.role.code >= 200){ %>
+
       <div class="col-md-auto text-end me-5 mb-2 justify-content-flex-start">
+        <% if(user) { if (user.role.code >= 100){ %>
+
+        <a href="/logout" class="btn btn-success">logout</a>
+
+        <% } } %> <% if(user) { if (user.role.code >= 200){ %>
         <a href="/admin" class="btn btn-primary">Admin</a>
+        <% } } %>
       </div>
-      <% } } %>
     </header>
   </div>
 </section>

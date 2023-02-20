@@ -50,7 +50,7 @@ module.exports = (app) => {
   passport.deserializeUser(async function (id, cb) {
     try {
       const user = await Author.findByPk(id, { include: Role });
-      cb(null, user); // req.user
+      cb(null, user);
     } catch (error) {
       cb(error);
     }

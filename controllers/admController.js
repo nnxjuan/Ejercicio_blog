@@ -13,7 +13,7 @@ async function edit(req, res) {}
 async function update(req, res) {
   const users = await Author.findAll({ include: Role });
 
-  res.redirect("/admin/users");
+  res.redirect("/privado/admin/users");
 }
 async function destroy(req, res) {
   const { id } = req.params;

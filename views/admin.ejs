@@ -13,12 +13,14 @@
   </head>
   <body>
     <%- include('partials/navbar') %>
-    <p><%= user.role.name %></p>
-    <a href="/admin/create" class="btn btn-success">nuevo</a>
-    <!-- se agrega boton de  logout -->
-    <a href="/logout" class="btn btn-success">logout</a>
-    <a href="/privado/admin/users" class="btn btn-danger">Users</a>
+    <p class="alert alert-dark"><%= user.role.name %></p>
+
     <div class="container mt-4">
+      <a href="/admin/create" class="btn btn-success">nuevo</a>
+
+      <% if(user) { if (user.role.code >= 400){ %>
+      <a href="/privado/admin/users" class="btn btn-danger">Users</a>
+      <% }} %>
       <table class="table">
         <thead>
           <tr>
@@ -38,7 +40,7 @@
             <td>
               <figure class="figure">
                 <img
-                  src="<%= article.img %>"
+                  src="/img/<%=article.img%>"
                   class="figure-img img-fluid rounded"
                   alt="image"
                 />
@@ -51,12 +53,12 @@
             <td>
               <div>
                 <a
-                  href="/admin/edit/<%= article.id %>  "
+                  href="/privado/admin/edit/<%= article.id %>  "
                   class="btn btn-primary"
                   >Editar</a
                 >
                 <a
-                  href="/admin/delet/<%= article.id %>  "
+                  href="/privado/admin/delet/<%= article.id %>  "
                   class="btn btn-danger"
                   >Eliminar</a
                 >

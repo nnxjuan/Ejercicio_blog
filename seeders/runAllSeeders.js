@@ -7,7 +7,7 @@ const commentSeeder = require("./commentSeeder");
 async function runAllSeeders() {
   // await roleSeeder();
   // await authorSeeder();
-  // await articleSeeder();
-  await commentSeeder();
+  await articleSeeder();
+  // await commentSeeder();
 }
 runAllSeeders();

@@ -10,7 +10,7 @@ module.exports = async () => {
       id: [i],
       title: faker.lorem.sentence(5),
       content: faker.lorem.paragraphs(1),
-      img: faker.image.abstract(false),
+      img: faker.helpers.arrayElement(["1.jpg", "2.jpg", "3.jpg", "4.jpg"]),
       date: faker.date.past(),
       authorId: faker.helpers.arrayElement([1, 2, 3, 4]),
     });
