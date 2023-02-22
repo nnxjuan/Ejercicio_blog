@@ -5,6 +5,7 @@ const admController = require("../controllers/admController");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const admRole = require("../middlewares/admRole");
 const escritorRole = require("../middlewares/escritorRole");
+const { expressjwt: checkJwt } = require("express-jwt");
 
 router.use(isAuthenticated);
 
